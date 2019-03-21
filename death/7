@@ -1,0 +1,78 @@
+#! /usr/local/bin/vvp
+:ivl_version "11.0 (devel)" "(s20150603-559-gff8ccc0)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "system";
+:vpi_module "vhdl_sys";
+:vpi_module "vhdl_textio";
+:vpi_module "v2005_math";
+:vpi_module "va_math";
+S_0x206da90 .scope module, "multicyclecontroller" "multicyclecontroller" 2 1;
+ .timescale 0 0;
+    .port_info 0 /OUTPUT 4 "newstate";
+    .port_info 1 /OUTPUT 1 "PCWrite";
+    .port_info 2 /OUTPUT 1 "PCWriteCond";
+    .port_info 3 /OUTPUT 1 "IorD";
+    .port_info 4 /OUTPUT 1 "MemRead";
+    .port_info 5 /OUTPUT 1 "MemWrite";
+    .port_info 6 /OUTPUT 1 "IRWrite";
+    .port_info 7 /OUTPUT 1 "MemToReg";
+    .port_info 8 /OUTPUT 1 "PCSource1";
+    .port_info 9 /OUTPUT 1 "PCSource0";
+    .port_info 10 /OUTPUT 1 "ALUOp1";
+    .port_info 11 /OUTPUT 1 "ALUOp0";
+    .port_info 12 /OUTPUT 1 "ALUSrcB1";
+    .port_info 13 /OUTPUT 1 "ALUSrcB0";
+    .port_info 14 /OUTPUT 1 "ALUSrcA";
+    .port_info 15 /OUTPUT 1 "RegWrite";
+    .port_info 16 /OUTPUT 1 "RegDst";
+    .port_info 17 /INPUT 6 "opcode";
+    .port_info 18 /INPUT 4 "oldstate";
+o0x7f43bb0a43d8 .functor BUFZ 4, C4<zzzz>; HiZ drive
+L_0x20b7c90 .functor NOT 4, o0x7f43bb0a43d8, C4<0000>, C4<0000>, C4<0000>;
+o0x7f43bb0a4018 .functor BUFZ 1, C4<z>; HiZ drive
+v0x2093f70_0 .net "ALUOp0", 0 0, o0x7f43bb0a4018;  0 drivers
+o0x7f43bb0a4048 .functor BUFZ 1, C4<z>; HiZ drive
+v0x20b6780_0 .net "ALUOp1", 0 0, o0x7f43bb0a4048;  0 drivers
+o0x7f43bb0a4078 .functor BUFZ 1, C4<z>; HiZ drive
+v0x20b6840_0 .net "ALUSrcA", 0 0, o0x7f43bb0a4078;  0 drivers
+o0x7f43bb0a40a8 .functor BUFZ 1, C4<z>; HiZ drive
+v0x20b6910_0 .net "ALUSrcB0", 0 0, o0x7f43bb0a40a8;  0 drivers
+o0x7f43bb0a40d8 .functor BUFZ 1, C4<z>; HiZ drive
+v0x20b69d0_0 .net "ALUSrcB1", 0 0, o0x7f43bb0a40d8;  0 drivers
+o0x7f43bb0a4108 .functor BUFZ 1, C4<z>; HiZ drive
+v0x20b6ae0_0 .net "IRWrite", 0 0, o0x7f43bb0a4108;  0 drivers
+o0x7f43bb0a4138 .functor BUFZ 1, C4<z>; HiZ drive
+v0x20b6ba0_0 .net "IorD", 0 0, o0x7f43bb0a4138;  0 drivers
+o0x7f43bb0a4168 .functor BUFZ 1, C4<z>; HiZ drive
+v0x20b6c60_0 .net "MemRead", 0 0, o0x7f43bb0a4168;  0 drivers
+o0x7f43bb0a4198 .functor BUFZ 1, C4<z>; HiZ drive
+v0x20b6d20_0 .net "MemToReg", 0 0, o0x7f43bb0a4198;  0 drivers
+o0x7f43bb0a41c8 .functor BUFZ 1, C4<z>; HiZ drive
+v0x20b6e70_0 .net "MemWrite", 0 0, o0x7f43bb0a41c8;  0 drivers
+o0x7f43bb0a41f8 .functor BUFZ 1, C4<z>; HiZ drive
+v0x20b6f30_0 .net "PCSource0", 0 0, o0x7f43bb0a41f8;  0 drivers
+o0x7f43bb0a4228 .functor BUFZ 1, C4<z>; HiZ drive
+v0x20b6ff0_0 .net "PCSource1", 0 0, o0x7f43bb0a4228;  0 drivers
+o0x7f43bb0a4258 .functor BUFZ 1, C4<z>; HiZ drive
+v0x20b70b0_0 .net "PCWrite", 0 0, o0x7f43bb0a4258;  0 drivers
+o0x7f43bb0a4288 .functor BUFZ 1, C4<z>; HiZ drive
+v0x20b7170_0 .net "PCWriteCond", 0 0, o0x7f43bb0a4288;  0 drivers
+o0x7f43bb0a42b8 .functor BUFZ 1, C4<z>; HiZ drive
+v0x20b7230_0 .net "RegDst", 0 0, o0x7f43bb0a42b8;  0 drivers
+o0x7f43bb0a42e8 .functor BUFZ 1, C4<z>; HiZ drive
+v0x20b72f0_0 .net "RegWrite", 0 0, o0x7f43bb0a42e8;  0 drivers
+v0x20b73b0_0 .net *"_s2", 3 0, L_0x20b7c90;  1 drivers
+v0x20b7560_0 .net *"_s5", 0 0, L_0x20b7d60;  1 drivers
+v0x20b7600_0 .net "andArray", 16 0, L_0x206dc20;  1 drivers
+v0x20b76c0_0 .var "newstate", 3 0;
+v0x20b77a0_0 .net "oldstate", 3 0, o0x7f43bb0a43d8;  0 drivers
+o0x7f43bb0a4408 .functor BUFZ 6, C4<zzzzzz>; HiZ drive
+v0x20b7880_0 .net "opcode", 5 0, o0x7f43bb0a4408;  0 drivers
+L_0x206dc20 .part/pv L_0x20b7d60, 0, 1, 17;
+L_0x20b7d60 .reduce/and L_0x20b7c90;
+# The file index is used to find the file name in the following table.
+:file_names 3;
+    "N/A";
+    "<interactive>";
+    "7.v";

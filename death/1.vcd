@@ -1,0 +1,61 @@
+$date
+	Sat Nov 17 16:50:36 2018
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module testbench $end
+$var wire 1 ! f $end
+$var reg 1 " a $end
+$var reg 1 # b $end
+$var reg 1 $ s $end
+$scope module mux_gate $end
+$var wire 1 " a $end
+$var wire 1 # b $end
+$var wire 1 % c $end
+$var wire 1 & d $end
+$var wire 1 ! f $end
+$var wire 1 ' nots $end
+$var wire 1 $ s $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+x'
+x&
+0%
+x$
+1#
+0"
+x!
+$end
+#2
+1!
+0'
+1&
+1$
+#7
+0!
+1'
+0&
+0$
+#17
+1!
+1%
+0#
+1"
+#32
+0!
+0%
+0'
+1$
+#52
+1!
+1%
+1'
+0$
+#152

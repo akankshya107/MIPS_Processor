@@ -1,0 +1,112 @@
+#! /usr/local/bin/vvp
+:ivl_version "11.0 (devel)" "(s20150603-559-gff8ccc0)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "system";
+:vpi_module "vhdl_sys";
+:vpi_module "vhdl_textio";
+:vpi_module "v2005_math";
+:vpi_module "va_math";
+S_0xaba390 .scope module, "mux2to1_beh" "mux2to1_beh" 2 17;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "a";
+    .port_info 1 /INPUT 1 "b";
+    .port_info 2 /INPUT 1 "s";
+    .port_info 3 /OUTPUT 1 "f";
+o0x7fd75126c018 .functor BUFZ 1, C4<z>; HiZ drive
+v0xa82c20_0 .net "a", 0 0, o0x7fd75126c018;  0 drivers
+o0x7fd75126c048 .functor BUFZ 1, C4<z>; HiZ drive
+v0xad0f60_0 .net "b", 0 0, o0x7fd75126c048;  0 drivers
+v0xad1020_0 .var "f", 0 0;
+o0x7fd75126c0a8 .functor BUFZ 1, C4<z>; HiZ drive
+v0xad10f0_0 .net "s", 0 0, o0x7fd75126c0a8;  0 drivers
+E_0xabc170 .event edge, v0xad0f60_0, v0xa82c20_0, v0xad10f0_0;
+S_0xaba590 .scope module, "mux2to1_df" "mux2to1_df" 2 11;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "a";
+    .port_info 1 /INPUT 1 "b";
+    .port_info 2 /INPUT 1 "s";
+    .port_info 3 /OUTPUT 1 "f";
+o0x7fd75126c198 .functor BUFZ 1, C4<z>; HiZ drive
+v0xad1260_0 .net "a", 0 0, o0x7fd75126c198;  0 drivers
+o0x7fd75126c1c8 .functor BUFZ 1, C4<z>; HiZ drive
+v0xad1340_0 .net "b", 0 0, o0x7fd75126c1c8;  0 drivers
+v0xad1400_0 .net "f", 0 0, L_0xad2220;  1 drivers
+o0x7fd75126c228 .functor BUFZ 1, C4<z>; HiZ drive
+v0xad14a0_0 .net "s", 0 0, o0x7fd75126c228;  0 drivers
+L_0xad2220 .functor MUXZ 1, o0x7fd75126c1c8, o0x7fd75126c198, o0x7fd75126c228, C4<>;
+S_0xa82a90 .scope module, "testbench" "testbench" 2 26;
+ .timescale 0 0;
+v0xad1ec0_0 .var "a", 0 0;
+v0xad1f80_0 .var "b", 0 0;
+v0xad2050_0 .net "f", 0 0, L_0xad2640;  1 drivers
+v0xad2150_0 .var "s", 0 0;
+S_0xad1610 .scope module, "mux_gate" "mux2to1_gate" 2 29, 2 1 0, S_0xa82a90;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "a";
+    .port_info 1 /INPUT 1 "b";
+    .port_info 2 /INPUT 1 "s";
+    .port_info 3 /OUTPUT 1 "f";
+L_0xad2380 .functor NOT 1, v0xad2150_0, C4<0>, C4<0>, C4<0>;
+L_0xad2470 .functor AND 1, L_0xad2380, v0xad1ec0_0, C4<1>, C4<1>;
+L_0xad2580 .functor AND 1, v0xad2150_0, v0xad1f80_0, C4<1>, C4<1>;
+L_0xad2640 .functor OR 1, L_0xad2470, L_0xad2580, C4<0>, C4<0>;
+v0xad1880_0 .net "a", 0 0, v0xad1ec0_0;  1 drivers
+v0xad1960_0 .net "b", 0 0, v0xad1f80_0;  1 drivers
+v0xad1a20_0 .net "c", 0 0, L_0xad2470;  1 drivers
+v0xad1af0_0 .net "d", 0 0, L_0xad2580;  1 drivers
+v0xad1bb0_0 .net "f", 0 0, L_0xad2640;  alias, 1 drivers
+v0xad1cc0_0 .net "nots", 0 0, L_0xad2380;  1 drivers
+v0xad1d80_0 .net "s", 0 0, v0xad2150_0;  1 drivers
+    .scope S_0xaba390;
+T_0 ;
+    %wait E_0xabc170;
+    %load/vec4 v0xad10f0_0;
+    %pad/u 32;
+    %cmpi/e 1, 0, 32;
+    %jmp/0xz  T_0.0, 4;
+    %load/vec4 v0xa82c20_0;
+    %store/vec4 v0xad1020_0, 0, 1;
+    %jmp T_0.1;
+T_0.0 ;
+    %load/vec4 v0xad0f60_0;
+    %store/vec4 v0xad1020_0, 0, 1;
+T_0.1 ;
+    %jmp T_0;
+    .thread T_0, $push;
+    .scope S_0xa82a90;
+T_1 ;
+    %vpi_call 2 32 "$dumpfile", "1.vcd" {0 0 0};
+    %vpi_call 2 33 "$dumpvars", 32'sb00000000000000000000000000000000, S_0xa82a90 {0 0 0};
+    %vpi_call 2 34 "$monitor", " ", $time, " a=%b, b=%b, s=%b, f=%b", v0xad1ec0_0, v0xad1f80_0, v0xad2150_0, v0xad2050_0 {0 0 0};
+    %delay 0, 0;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0xad1ec0_0, 0, 1;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0xad1f80_0, 0, 1;
+    %delay 2, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0xad2150_0, 0, 1;
+    %delay 5, 0;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0xad2150_0, 0, 1;
+    %delay 10, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0xad1ec0_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0xad1f80_0, 0, 1;
+    %delay 15, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0xad2150_0, 0, 1;
+    %delay 20, 0;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0xad2150_0, 0, 1;
+    %delay 100, 0;
+    %vpi_call 2 41 "$finish" {0 0 0};
+    %end;
+    .thread T_1;
+# The file index is used to find the file name in the following table.
+:file_names 3;
+    "N/A";
+    "<interactive>";
+    "1.v";
